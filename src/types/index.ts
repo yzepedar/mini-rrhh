@@ -1,11 +1,12 @@
 export type Department =
-| "Tecnologia"
-| "Recursos Humanos"
-| "Finanzas"
-| "Operaciones"
-| "Ventas";
-
+  | "Tecnologia"
+  | "Recursos Humanos"
+  | "Finanzas"
+  | "Operaciones"
+  | "Ventas";
+ 
 export type EmployeeRole = "admin" | "hr" | "employee";
+ 
 export type EmployeeStatus = "active" | "inactive" | "on_leave";
 
 export interface Employee {
@@ -57,7 +58,6 @@ export interface PaginatedResponse<T> {
   pageSize: number;
   totalPages: number;
 }
-
 // --- Tipos de navegación ---
  
 export interface NavItem {

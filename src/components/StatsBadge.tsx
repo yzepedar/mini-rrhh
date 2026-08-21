@@ -1,31 +1,26 @@
-import type { FC } from 'react';
-
+// src/components/StatsBadge.tsx
 interface StatsBadgeProps {
   label: string;
   value: number;
-  color?: string;
+  variant?: "blue" | "green" | "yellow" | "red";
 }
-
-const StatsBadge: FC<StatsBadgeProps> = ({ label, value, color = '#3b82f6' }) => {
+const variantConfig = {
+  blue: { border: "border-blue-600", text: "text-blue-600" },
+  green: { border: "border-green-600", text: "text-green-600" },
+  yellow: { border: "border-yellow-600", text: "text-yellow-600" },
+  red: { border: "border-red-500", text: "text-red-500" },
+};
+function StatsBadge({ label, value, variant = "blue" }: StatsBadgeProps) {
+  const style = variantConfig[variant];
   return (
     <div
-      style={{
-        border: `3px solid ${color}`,
-        borderRadius: '12px',
-        padding: '24px 16px',
-        minWidth: '180px',
-        textAlign: 'center',
-        backgroundColor: 'white',
-      }}
+      className={`flex flex-col items-center px-5 py-3 rounded-lg
+bg-white border min-w-[120px] ${style.border}
+hover:shadow-lg transition-shadow duration-200`}
     >
-      <p style={{ margin: '0 0 8px 0', fontSize: '32px', fontWeight: 'bold', color }}>
-        {value}
-      </p>
-      <p style={{ margin: 0, fontSize: '14px', color: '#9ca3af' }}>
-        {label}
-      </p>
+      <span className={`text-2xl font-bold ${style.text}`}>{value}</span>
+      <span className="text-sm text-slate-500">{label}</span>
     </div>
   );
-};
-
+}
 export default StatsBadge;
