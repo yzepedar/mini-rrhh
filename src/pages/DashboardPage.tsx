@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 
 function DashboardPage() {
-  const [userName, setUserName] = useState("");
+  const [userName, setUserName] = useState<string>("");
 
   // Recuperar nombre del usuario desde localStorage
   useEffect(() => {
     const storedName = localStorage.getItem("userName");
-    if (storedName) setUserName(storedName);
+    if (storedName) {
+      setUserName(storedName);
+    }
   }, []);
 
   return (
@@ -33,7 +35,7 @@ function DashboardPage() {
         {/* Tarjeta 3 */}
         <div className="bg-white rounded-xl shadow-md p-6 flex-1 transition-shadow duration-200 hover:shadow-lg">
           <h2 className="text-xl font-semibold text-slate-800">Proyectos</h2>
-          <p className="text-slate-500 mt-2">Total: 2</p>
+          <p className="text-slate-500 mt-2">Total: 3</p>
         </div>
       </div>
     </div>
