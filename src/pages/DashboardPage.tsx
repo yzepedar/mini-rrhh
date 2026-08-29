@@ -1,42 +1,54 @@
-import { useEffect, useState } from "react";
+// src/pages/DashboardPage.tsx
+
+import { Link } from 'react-router-dom';
+import { mockEmployees } from '../utils/mockData';
+import { useAuthStore } from '../store/authStore';
 
 function DashboardPage() {
-  const [userName, setUserName] = useState<string>("");
+  const total = mockEmployees.length;
+  const active = mockEmployees.filter(e => e.status === 'active').length;
+  const onLeave = mockEmployees.filter(e => e.status === 'on_leave').length;
 
-  // Recuperar nombre del usuario desde localStorage
-  useEffect(() => {
-    const storedName = localStorage.getItem("userName");
-    if (storedName) {
-      setUserName(storedName);
-    }
-  }, []);
+  // Texto de bienvenida dinámico: lee el nombre guardado por LoginPage.tsx
+  const userName = useAuthStore(state => state.user?.name) || 'invitado';
+
+  const stats = [
+    { label: 'Total empleados', value: total, bg: 'bg-blue-100', text: 'text-blue-800' },
+    { label: 'Activos', value: active, bg: 'bg-green-100', text: 'text-green-800' },
+    { label: 'En permiso', value: onLeave, bg: 'bg-yellow-100', text: 'text-yellow-800' },
+  ];
 
   return (
-    <div className="min-h-screen bg-slate-50 p-8">
-      {/* Texto de bienvenida dinámico */}
-      <h1 className="text-3xl font-bold text-slate-900 mb-6">
-        Bienvenido, {userName || "Usuario"} 
-      </h1>
+    <div className="p-6">
+      <h2 className="text-2xl font-bold text-slate-900 mb-1">Dashboard</h2>
+      {userName && (
+       <span className="text-slate-500 mb-6 block animate-pulse">
+  Bienvenido, {userName}
+</span>
+      )}
+      {!userName && <div className="mb-6" />}
 
-      {/* Contenedor responsive para las tarjetas */}
-      <div className="flex flex-col sm:flex-row gap-6">
-        {/* Tarjeta 1 */}
-        <div className="bg-white rounded-xl shadow-md p-6 flex-1 transition-shadow duration-200 hover:shadow-lg">
-          <h2 className="text-xl font-semibold text-slate-800">Empleados activos</h2>
-          <p className="text-slate-500 mt-2">Total: 5</p>
-        </div>
+      <div className="flex flex-col sm:flex-row gap-4 mb-8 flex-wrap">
+        {stats.map(stat => (
+          <div
+            key={stat.label}
+            className={`${stat.bg} p-6 rounded-xl min-w-[160px] flex-1
+                       hover:shadow-lg transition-shadow duration-200`}
+          >
+            <p className={`${stat.text} text-sm mb-1`}>{stat.label}</p>
+            <p className={`${stat.text} text-4xl font-bold`}>{stat.value}</p>
+          </div>
+        ))}
+      </div>
 
-        {/* Tarjeta 2 */}
-        <div className="bg-white rounded-xl shadow-md p-6 flex-1 transition-shadow duration-200 hover:shadow-lg">
-          <h2 className="text-xl font-semibold text-slate-800">Departamentos</h2>
-          <p className="text-slate-500 mt-2">Total: 5</p>
-        </div>
-
-        {/* Tarjeta 3 */}
-        <div className="bg-white rounded-xl shadow-md p-6 flex-1 transition-shadow duration-200 hover:shadow-lg">
-          <h2 className="text-xl font-semibold text-slate-800">Proyectos</h2>
-          <p className="text-slate-500 mt-2">Total: 3</p>
-        </div>
+      <div className="flex gap-3">
+        <Link
+          to="/empleados"
+          className="px-5 py-2.5 bg-brand-800 hover:bg-brand-700 text-white
+                    rounded-lg text-sm transition-colors"
+        >
+          Ver empleados →
+        </Link>
       </div>
     </div>
   );
