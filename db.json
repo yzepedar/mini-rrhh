@@ -1,19 +1,95 @@
 {
-  "posts": [
+  "employees": [
     {
       "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-  "comments": [
+      "name": "Ana García",
+      "email": "ana.garcia@empresa.com",
+      "position": "Desarrolladora Frontend",
+      "department": "Tecnologia",
+      "salary": 8500,
+      "hireDate": "2022-03-15",
+      "status": "active",
+      "role": "employee",
+      "avatarUrl": "https://i.pravatar.cc/64?img=1"
+    },
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "id": 2,
+      "name": "Carlos Martínez",
+      "email": "carlos.martinez@empresa.com",
+      "position": "Gerente de RRHH",
+      "department": "Recursos Humanos",
+      "salary": 12000,
+      "hireDate": "2019-07-01",
+      "status": "active",
+      "role": "hr"
+    },
+    {
+      "id": 3,
+      "name": "María López",
+      "email": "maria.lopez@empresa.com",
+      "position": "Contadora Senior",
+      "department": "Finanzas",
+      "salary": 9500,
+      "hireDate": "2021-01-20",
+      "status": "on_leave",
+      "role": "employee"
+    },
+    {
+      "id": 4,
+      "name": "Roberto Silva",
+      "email": "roberto.silva@empresa.com",
+      "position": "Administrador del Sistema",
+      "department": "Tecnologia",
+      "salary": 15000,
+      "hireDate": "2018-05-10",
+      "status": "active",
+      "role": "admin"
+    },
+    {
+      "id": 5,
+      "name": "Nayeli Ramirez",
+      "email": "nayeli@empresa.com",
+      "position": "Diseñadora Gráfica",
+      "department": "Finanzas",
+      "salary": 8000,
+      "hireDate": "2022-09-12",
+      "status": "active",
+      "role": "employee"
+    },
+    {
+      "id": 6,
+      "name": "Alex Torres",
+      "email": "alex@empresa.com",
+      "position": "Analista de Datos",
+      "department": "Tecnologia",
+      "salary": 9000,
+      "hireDate": "2022-01-15",
+      "status": "active",
+      "role": "employee"
+    },
+    {
+      "name": "Yeniffer Zepeda",
+      "email": "yeniffer@empresa.com",
+      "position": "Jefe",
+      "department": "Tecnologia",
+      "salary": 8094,
+      "hireDate": "2026-05-05",
+      "status": "active",
+      "role": "employee",
+      "phone": "47102300",
+      "id": 7
+    },
+    {
+      "name": "Alexander Morales",
+      "email": "alexander@empresa.com",
+      "position": "Analista",
+      "department": "Tecnologia",
+      "salary": 4099,
+      "hireDate": "2025-05-05",
+      "status": "active",
+      "role": "employee",
+      "phone": "47102300",
+      "id": 8
     }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }

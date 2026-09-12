@@ -1,6 +1,7 @@
 // src/pages/DashboardPage.tsx
 import { Link } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
+import type { AuthState } from '../store/authStore';
 import { useEmployees } from '../hooks/useEmployees';
 
 const statVariants = {
@@ -10,7 +11,7 @@ const statVariants = {
 };
 
 function DashboardPage() {
-  const userName = useAuthStore(state => state.user?.name) || 'invitado';
+  const userName = useAuthStore((state: AuthState) => state.user?.name) || 'invitado';
   // Mismos datos que EmployeesPage — TanStack Query comparte el cache entre
   // ambas pantallas, así que esto no dispara una petición nueva si ya se
   // cargó la lista sin filtros en otra vista.

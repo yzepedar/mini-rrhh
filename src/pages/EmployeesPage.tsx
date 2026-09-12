@@ -1,5 +1,6 @@
 // src/pages/EmployeesPage.tsx
 import { useState, useCallback, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import type { Employee, Department, EmployeeStatus, EmployeeRole } from '../types';
 import EmployeeCard from '../components/EmployeeCard';
 import StatsBadge from '../components/StatsBadge';
@@ -16,6 +17,8 @@ const nextStatus: Record<EmployeeStatus, EmployeeStatus> = {
 };
 
 function EmployeesPage() {
+  const navigate = useNavigate();
+
   // Estado de los filtros — esto sigue siendo estado LOCAL (de la UI), no del servidor
   const [search, setSearch] = useState<string>('');
   const [selectedDepartment, setSelectedDepartment] = useState<Department | ''>('');
@@ -58,8 +61,8 @@ function EmployeesPage() {
 
   // Memoizamos el handler para no recrearlo en cada render
   const handleSelectEmployee = useCallback((employee: Employee) => {
-    alert(`Empleado: ${employee.name}\nCargo: ${employee.position}\nDepartamento: ${employee.department}`);
-  }, []);
+    navigate(`/empleados/${employee.id}`);
+  }, [navigate]);
 
   const handleDeleteEmployee = useCallback((id: number) => {
     if (!confirm('¿Estás seguro de eliminar este empleado?')) return;
@@ -381,12 +384,14 @@ function EmployeesPage() {
               >
                 ×
               </button>
-              <EmployeeCard
-                employee={employee}
-                onSelect={handleSelectEmployee}
-                onToggleStatus={handleToggleStatus}
-              />
+             <EmployeeCard
+  employee={employee}
+  onSelect={handleSelectEmployee}
+  onToggleStatus={handleToggleStatus}
+/>
+
             </div>
+
           ))}
         </div>
       )}
