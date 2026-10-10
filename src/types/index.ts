@@ -1,13 +1,17 @@
+// --- Tipos base del dominio ---
+
 export type Department =
-  | "Tecnologia"
+  | "Tecnología"
   | "Recursos Humanos"
   | "Finanzas"
   | "Operaciones"
   | "Ventas";
- 
+
 export type EmployeeRole = "admin" | "hr" | "employee";
- 
+
 export type EmployeeStatus = "active" | "inactive" | "on_leave";
+
+// --- Entidad principal ---
 
 export interface Employee {
   id: number;
@@ -23,34 +27,46 @@ export interface Employee {
   phone?: string;
 }
 
-// --- Tipos para creación y actualización ---
- 
+// --- creación y actualización ---
+
 export type CreateEmployeeDto = Omit<Employee, "id">;
 export type UpdateEmployeeDto = Partial<CreateEmployeeDto>;
- 
-// --- Tipos de autenticación ---
- 
-export interface User {
-  id: number;
+
+// --- Tipos de autenticación (JWT real contra API-RH, Clase 9) ---
+
+// Roles que realmente emite el API-RH del docente (distintos del EmployeeRole
+// de arriba, que es un campo propio del empleado simulado de este mini-proyecto).
+export type AuthRole = "ADMIN" | "HR_MANAGER" | "EMPLOYEE";
+
+export interface AuthUserRole {
+  code: AuthRole;
   name: string;
-  email: string;
-  role: EmployeeRole;
-  token: string;
 }
- 
+
+export interface AuthUser {
+  id: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  isActive: boolean;
+  role: AuthUserRole;
+  accessToken: string;
+  refreshToken: string;
+}
+
 export interface LoginCredentials {
   email: string;
   password: string;
 }
 
 // --- Tipos de respuesta de la API ---
- 
+
 export interface ApiResponse<T> {
   data: T;
   message: string;
   success: boolean;
 }
- 
+
 export interface PaginatedResponse<T> {
   data: T[];
   total: number;
@@ -58,11 +74,12 @@ export interface PaginatedResponse<T> {
   pageSize: number;
   totalPages: number;
 }
+
 // --- Tipos de navegación ---
- 
+
 export interface NavItem {
   label: string;
   path: string;
   icon: string;
-  allowedRoles: EmployeeRole[];
+  allowedRoles: AuthRole[];
 }
